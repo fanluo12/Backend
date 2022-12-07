@@ -28,5 +28,10 @@ public class EmployeeController {
         return new ResponseEntity<Activity>(activityServiceIml.getAll(), HttpStatus.OK);
 //        return activityServiceIml.getAll();
     }
+    
+    @ExceptionHandler
+    public ResponseEntity<String> exceptionHandler() {
+        return new ResponseEntity<>("Exception", HttpStatus.BAD_REQUEST);
+    }
 
 }
