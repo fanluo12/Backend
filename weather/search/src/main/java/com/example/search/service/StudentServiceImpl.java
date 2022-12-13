@@ -35,7 +35,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Map<Integer, Map[]> getStudentByIds(List<String> ids) {
+    public Map<Integer, Map[]> getStudentByIds() {
         List<CompletableFuture> completableFutureList = new ArrayList<>();
         String[] ids = new String[3];
         ids[0] = "1";
@@ -53,10 +53,10 @@ public class StudentServiceImpl implements StudentService {
         }
         return CompletableFuture.allOf(completableFutureList.toArray(new CompletableFuture[0]))
                 .thenApply(VOID -> {
-                    Map<Integer, Map> map = new HashMap<>();
+                    Map<Integer, Map[]> map = new HashMap<>();
                     for(int i = 0; i < completableFutureList.size(); i++) {
                         try {
-                            map.put(Integer.valueOf(ids.get(i)), (Map)completableFutureList.get(i).get());
+                            map.put(ids[i], (Map[])completableFutureList.get(i).join());
                         } catch (InterruptedException e) {
                             throw new RuntimeException(e);
                         } catch (ExecutionException e) {
