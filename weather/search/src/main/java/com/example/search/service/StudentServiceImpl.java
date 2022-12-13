@@ -35,8 +35,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Map<Integer, Map> getStudentByIds(List<String> ids) {
+    public Map<Integer, Map[]> getStudentByIds(List<String> ids) {
         List<CompletableFuture> completableFutureList = new ArrayList<>();
+        String[] ids = new String[3];
+        ids[0] = "1";
+        ids[1] = "2";
+        ids[2] = "3";
         for(String id: ids) {
             completableFutureList.add(
                     CompletableFuture.supplyAsync(
